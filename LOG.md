@@ -103,3 +103,56 @@ Self-directed chemical engineering project: designing a seawater reverse osmosis
 
 **Next:** Session 5, Setup.
 
+
+
+## 2026-11-19 — Topic 1, Session 5 (*time spent*)
+
+**Did:** set up the tools for the build. Created a MathWorks account and confirmed MATLAB works. Created a GitHub account and the [swro-desalination](https://github.com/Kai-Wheeler/swro-desalination) repository, and copied this log into LOG.md. This finishes Topic 1.
+
+**Decisions / assumptions:** commit straight to the main branch while working solo. Skipped the Topic 1 quiz; my own notes on each unit are my reference. Felder & Rousseau is optional, not needed for the build.
+
+**Confused by:** *anything still unclear*
+
+**Next:** check that Simulink is included in my MATLAB license, then Topic 2, MATLAB model.
+
+## 2026-11-22 — Topic 2, Session 1 (*time spent*)
+
+**Did:** completed all of MATLAB Onramp and earned the 100% course certificate. Worked through the MATLAB ideas and the kettle example, then answered the Session 1 self-check. Graded 8/10.
+
+**Learned / asked about:**
+
+- `[value, index] = max(x)` gives two outputs in a fixed order: the value, then its position. `min` works the same way, which is how I'll find the lowest-energy recovery in Session 3.
+- `start:step:end` builds an evenly spaced vector, and `'` flips a row into a column. Square brackets are for typing out a few specific values.
+- Indexing: `v(3)` picks the 3rd element of a vector, and `A(:,v)` picks a whole column of a matrix.
+- `hold on` keeps earlier plots on the same axes; `hold off` ends it.
+- `for` loops and `if`/`else` blocks each close with their own `end`. Plot settings like `"LineWidth", 3` go at the end of `plot` as name–value pairs.
+
+**Learned from feedback:** `./` is needed when dividing by an array (`a./b` or `1./r`). Dividing an array by a single number works either way.
+
+**Decisions / assumptions:** did the full Onramp, not just the modules the project needs, so the certificate shows 100% for my resume.
+
+**Confused by:** *anything still unclear*
+
+**Next:** Session 2, Balance and osmotic pressure in code.
+
+## 2026-11-22 — Topic 2, Session 2 and Assignment 1 (*time spent*)
+
+**Did:** built `plant_model.mlx` section by section: inputs, water and salt balance, salt check, an `osmoticPressure` function, results compared with the Topic 1 check values, and a `maxRecovery` function. Every result matched its check value. Ran Case 1 (45% recovery, 99.7% rejection) and Case 2 (50%, 99.5%) by changing only the inputs, exported a PDF of each, and uploaded them to GitHub. Claude supplied the `maxRecovery` code; I wrote the rest. Session 2 self-check graded 5/10.
+
+**Learned / asked about:**
+
+- Live scripts: code and text lines, sections, Ctrl+Enter to run one section and Run for the whole script, and the Workspace panel for checking variables.
+- MATLAB file names can only use letters, numbers and underscores.
+- Functions: the inputs in the first line are placeholders that get filled each time the function is called. A function can't see variables outside it, so constants are defined inside. Functions go at the bottom of the file and are called from sections above.
+- Don't use `pi` or `i` as variable names; MATLAB already uses them.
+- The brine's osmotic pressure is the one that matters for design. The permeate's is about 0.09 bar, small enough to ignore.
+- mol/L = (g/L) ÷ molar mass.
+- Max recovery at 60 bar is 50.5%. At 50% recovery the brine pushes back with 59.2 bar, almost at the limit, which is why the 50% plant in Topic 1 used 68 bar.
+
+**Learned from feedback:** the main reason to keep all inputs in one section is that a new design only means editing that section; nothing below has hard-coded numbers. Writing a formula as a function means it's written once, reused for any input, and fixed in one place if it changes.
+
+**Decisions / assumptions:** one live script, saved with the Case 1 inputs, plus a PDF of each case with its own check values.
+
+**Confused by:** *anything still unclear*
+
+**Next:** Session 3, Energy and energy recovery.
