@@ -156,3 +156,23 @@ Self-directed chemical engineering project: designing a seawater reverse osmosis
 **Confused by:** *anything still unclear*
 
 **Next:** Session 3, Energy and energy recovery.
+
+## 2026-11-26 — Topic 2, Session 3 and Assignment 2 (*time spent*)
+
+**Did:** added energy to `plant_model`: two energy functions, without and with an energy recovery device (ERD), checked against Topic 1 (4.63 / 2.19 kWh/m³ at 45% and 60 bar; 4.73 / 2.46 at 50% and 68 bar). Swept recovery from 30% to 60%, calculating the required pressure (brine osmotic pressure + 6 bar) and energy at each step, and plotted both curves. Lowest energy without an ERD: 4.53 kWh/m³ at 52% recovery. With an ERD: 1.84 kWh/m³ at 30%. Uploaded the updated code and `plant_model_session3.pdf`. Claude answered the Session 3 self-check and Assignment 2 part 5 at my request.
+
+**Learned / asked about:**
+
+- Energy without an ERD: E = P × (1/36) ÷ (recovery × pump efficiency). 1 bar × 1 m³ = 100 kJ = 1/36 kWh, and the pump pushes 1/r m³ of seawater per m³ of fresh water.
+- With an ERD, multiply by (1 − (1 − r) × ERD efficiency), the share of pumped energy the pump still supplies. Per m³ of fresh water the brine is (1 − r)/r m³, but the /r is already in the first part of the formula.
+- The pressure margin is the net driving pressure that keeps water flowing through the last membranes, plus room for friction and fouling. 6 bar matches the 60 bar design (60 − 53.9).
+- A sweep runs every calculation on a list of 31 recoveries at once. It only works with `.*` and `./`; checking one position, like `(16)` for 45%, is a quick way to test it.
+- `[value, index] = min(list)` gives the position of the lowest point; `rSweep(index)` turns that position into a recovery.
+- Pump efficiency is held at 80% for every design: each plant would get a pump chosen for its own flow and pressure.
+- Without an ERD, energy has a minimum in the middle (more seawater at low recovery vs. more pressure at high recovery). With an ERD, energy follows pressure, so it's lowest at the lowest recovery. Energy alone ignores intake, pretreatment and equipment size, which is why Topic 4 adds cost.
+
+**Decisions / assumptions:** 80% pump efficiency, 96% ERD efficiency, 6 bar pressure margin. Added "optimize the pressure margin" as an optional extra after Topic 4, so the margin becomes a value I work out rather than assume.
+
+**Confused by:** *anything still unclear*
+
+**Next:** Topic 2 check-in quiz, then Topic 3, Membrane model.
